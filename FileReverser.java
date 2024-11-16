@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 public class FileReverser {
 
     public String readFile(String filePath) throws IOException{
-        return new String (Files.readAllBytes(Paths.get(ˇ)));
+        return new String (Files.readAllBytes(Paths.get(filePath)));
     }
 
     public String reverseContent(String content) throws IOException{
@@ -21,4 +21,7 @@ public class FileReverser {
         String reversedContent = reverseContent(content);
         writeFile(outputFilePath, reversedContent);
     }
+    public static void main(String[] args) {
+		reverseFileContent("input.txt", "output.txt");
+	}
 }
