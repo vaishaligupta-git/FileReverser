@@ -1,0 +1,37 @@
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.io.IOException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+class FileReverserTest {
+
+    @Test
+    public void testReverseContent(){
+        FileReverser fileReverser = new FileReverser();
+        String content = "hsbc test";
+        String expected = "tset cbsh";
+        String actual = fileReverser.reverseContent(content);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testReverseFileContent() throws IOException {
+
+        FileReverser fileReverser = Mockito.mock(new FileReverser());
+
+        String inputFilePath = "input.txt";
+        String outputFilePath = "output.txt";
+        String content = "hsbc test";
+        String reversedContent = "tset cbsh";
+
+
+        doReturn(content).when(fileReverser).readFile(imputFilePath);
+        doNothing.when(fileReverser).writeFile(outputFilePath, reversedContent);
+
+        fileReverser.reverseFileContent(inputFilePath, outputFilePath);
+
+        verify(fileReverser).readFile(inputFilePath);
+        verify(fileReverser).writeFile(outputFilePath, reversedContent);
+    }
+}
